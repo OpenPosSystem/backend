@@ -12,10 +12,10 @@ jobs:
           - name: Build docker container
             run: docker compose build web
           - name: Assert that the code is linted
-            run: docker compose exec web make check
+            run: docker compose run web make check
           - name: Run Django Migrations
-            run: docker compose exec web make migrate
+            run: docker compose run web make migrate
           - name: Launch tests with coverage
             env:
               COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
-            run: docker compose exec -e COVERALLS_REPO_TOKEN web make test-coverage
+            run: docker compose run -e COVERALLS_REPO_TOKEN web make test-coverage
