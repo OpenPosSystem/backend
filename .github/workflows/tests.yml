@@ -23,7 +23,6 @@ jobs:
             env:
               COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
             run: |
-              docker compose run --name test-coverage web make test-coverage
-              docker cp test-coverage:/usr/src/app/coverage.xml ./coverage.xml
               pip install coveralls
-              coveralls
+              docker compose run web make test-coverage
+              coveralls --submit=app/coverage.xml --srcdir=app

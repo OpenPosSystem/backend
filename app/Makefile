@@ -8,9 +8,7 @@ test:
 	pytest
 
 test-coverage:
-	pytest
-	coverage report
-	coverage xml
+	coverage run -m pytest && coverage report && coverage xml
 
 check:
 	black --check .
