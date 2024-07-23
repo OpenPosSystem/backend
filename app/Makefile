@@ -11,7 +11,6 @@ test-coverage:
 	pytest
 	coverage report
 	coverage xml
-	coveralls
 
 check:
 	black --check .

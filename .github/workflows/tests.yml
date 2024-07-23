@@ -16,7 +16,7 @@ jobs:
           - name: Run Django Migrations
             run: docker compose run web make migrate
           - name: Launch tests with coverage
-            run: docker compose run web make test
+            run: docker compose run web make test-coverage
           - name: Set up Python
             uses: actions/setup-python@v4
             with:
