@@ -15,16 +15,15 @@ jobs:
             run: docker compose run web make check
           - name: Run Django Migrations
             run: docker compose run web make migrate
-          - name: Launch tests with coverage
-            run: docker compose run web make test-coverage
           - name: Set up Python
             uses: actions/setup-python@v4
             with:
               python-version: '3.12.4'
-          - name: Push test results to coveralls
+          - name: Run tests and submit coverage to coveralls
             env:
               COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
             run: |
+              docker compose run web make test-coverage
               cd app
               pip install coveralls
               coveralls
