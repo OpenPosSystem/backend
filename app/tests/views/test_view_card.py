@@ -5,7 +5,7 @@ from pos.models import Card, User
 from ..factories import CardFactory
 
 
-class TestTokenGeneration:
+class TestViewCard:
     @pytest.mark.django_db
     def test_list_cards_as_user_empty(self, authenticated_user_client):
         url = reverse("pos_cards-list")
