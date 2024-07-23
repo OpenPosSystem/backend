@@ -12,9 +12,9 @@ jobs:
           - name: Build docker container
             run: docker compose build web
           - name: Assert that the code is linted
-            run: docker compose run web make check
+            run: docker compose run --name lint-check web make check
           - name: Run Django Migrations
-            run: docker compose run web make migrate
+            run: docker compose run --name migrate web make migrate
           - name: Set up Python
             uses: actions/setup-python@v4
             with:
@@ -23,7 +23,7 @@ jobs:
             env:
               COVERALLS_REPO_TOKEN: ${{ secrets.COVERALLS_REPO_TOKEN }}
             run: |
-              docker compose run web make test-coverage
-              cd app
+              docker compose run --name test-coverage web make test-coverage
+              docker cp test-coverage:/usr/src/app/coverage.xml ./coverage.xml
               pip install coveralls
               coveralls
